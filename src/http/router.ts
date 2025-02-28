@@ -1,33 +1,33 @@
 import { IncomingMessage } from "node:http";
 import { NotFound } from "/errors/NotFound.ts";
 import { Response } from "/dto/Response.ts";
-import { XMPPController } from "./XMPPController";
 import { use } from "/util/use";
 import { BearerAuth } from "/auth/BearerAuth";
 
-export class Router {
-  #xmpp: XMPPController;
-  #auth: BearerAuth;
+type Route = (request: IncomingMessage) => Promise<Response>;
 
-  constructor(xmpp: XMPPController, auth: BearerAuth) {
-    this.#xmpp = xmpp;
+export class Router {
+  #auth: BearerAuth;
+  #routes: Record<string, Route>;
+
+  constructor(auth: BearerAuth) {
     this.#auth = auth;
+    this.#routes = {};
   }
 
   route(req: IncomingMessage): Promise<Response> {
     this.#auth.authorise(req);
-    switch (req.url || "") {
-      case "/xmpp":
-        return this.#xmpp.enqueue(req);
+    const route = this.#routes[req.url || ""];
+    if (!route) return Promise.reject(new NotFound());
+    else return route(req);
+  }
 
-      default:
-        return Promise.reject(new NotFound());
-    }
+  add(location: string, route: Route): void {
+    this.#routes[location] = route;
   }
 
   static provider(): Router {
-    const xmpp = use(XMPPController.provider);
     const auth = use(BearerAuth.provider);
-    return new Router(xmpp, auth);
+    return new Router(auth);
   }
 }

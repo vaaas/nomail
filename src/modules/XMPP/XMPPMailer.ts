@@ -3,10 +3,10 @@ import { client, xml } from "@xmpp/client";
 /** @ts-ignore */
 import jid from "@xmpp/jid";
 
-import { IMailer } from "./IMailer.ts";
 import { Mail } from "/dto/Mail.ts";
 import { use as defaultUse } from "/util/use.ts";
-import { XMPPConfiguration } from "/configuration/XMPPConfiguration.ts";
+import { XMPPConfiguration } from "./XMPPConfiguration";
+import { IMailer } from "/mailers/IMailer";
 
 export class XMPPMailer implements IMailer {
   private readonly config: XMPPConfiguration;

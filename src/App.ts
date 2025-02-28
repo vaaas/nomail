@@ -1,20 +1,30 @@
-import { PeriodicMail, PeriodicXMPP } from "./services/PeriodicMail";
-import { Web } from "./services/Web";
 import { use } from "./util/use";
 
 export class App {
-  #web: Web;
-  #periodicXMPP: PeriodicMail;
+  #services: IService[];
 
   constructor() {
-    this.#web = use(Web.provider);
-    this.#periodicXMPP = use(PeriodicXMPP.provider);
+    this.#services = [];
+  }
+
+  register(service: IService): App {
+    this.#services.push(service);
+    return this;
   }
 
   async start(): Promise<void> {
     console.log("starting all services");
-    await this.#web.start();
-    await this.#periodicXMPP.start();
+    for (const service of this.#services) await service.start();
     console.log("started all services");
+  }
+
+  async stop(): Promise<void> {
+    console.log("stopping all services");
+    for (const service of this.#services) await service.stop();
+    console.log("stopped all services");
+  }
+
+  static provider(): App {
+    return new App();
   }
 }

@@ -1,2 +1,2 @@
 - [x] auth with api key
-- [ ] pluggable architecture
+- [x] pluggable architecture

@@ -5,21 +5,28 @@ import { Router } from "/http/router.ts";
 import { MIMETYPE } from "/util/mimetype.ts";
 import { isRespondable, Response } from "/dto/Response.ts";
 
-export class Web {
+export class Web implements IService {
   #config: HTTPConfiguration;
   #router: Router;
+  #server: http.Server;
 
   constructor(config: HTTPConfiguration, router: Router) {
     this.#config = config;
     this.#router = router;
+    this.#server = http.createServer((req, res) =>
+      this.#requestListener(req, res),
+    );
   }
 
   start(): Promise<void> {
-    const server = http.createServer((req, res) =>
-      this.#requestListener(req, res),
-    );
     return new Promise((done) => {
-      server.listen(this.#config.port, this.#config.host, () => done());
+      this.#server.listen(this.#config.port, this.#config.host, () => done());
+    });
+  }
+
+  stop(): Promise<void> {
+    return new Promise((done) => {
+      this.#server.close(() => done());
     });
   }
 

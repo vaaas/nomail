@@ -1,11 +1,9 @@
-import { XMPPConfiguration } from "/configuration/XMPPConfiguration";
 import { IMailer } from "/mailers/IMailer";
-import { XMPPMailer } from "/mailers/XMPPMailer";
-import { MailQueue, XMPPMailQueue } from "/persistence/MailQueue";
+import { MailQueue } from "/persistence/MailQueue";
 import { Lock } from "/util/lock";
 import { use } from "/util/use";
 
-export class PeriodicMail {
+export class PeriodicMail implements IService {
   #mailer: IMailer;
   #queue: MailQueue;
   #id: ReturnType<typeof setInterval> | undefined;
@@ -25,6 +23,12 @@ export class PeriodicMail {
     return Promise.resolve();
   }
 
+  stop(): Promise<void> {
+    clearInterval(this.#id);
+    this.#id = undefined;
+    return Promise.resolve();
+  }
+
   #periodicSend() {
     if (this.#queue.isEmpty()) return;
     if (this.#lock.isRunning()) return;
@@ -40,14 +44,5 @@ export class PeriodicMail {
           ),
         ),
     );
-  }
-}
-
-export class PeriodicXMPP {
-  static provider(): PeriodicMail {
-    const mailer = use(XMPPMailer.provider);
-    const queue = use(XMPPMailQueue.provider);
-    const config = use(XMPPConfiguration.provider);
-    return new PeriodicMail(mailer, queue, config.period);
   }
 }

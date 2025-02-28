@@ -1,4 +1,3 @@
-import { XMPPConfiguration } from "/configuration/XMPPConfiguration";
 import { Mail } from "/dto/Mail.ts";
 import { QueueSizeExceeded } from "/errors/QueueSizeExceeded";
 import { Unary } from "/util/functions.ts";
@@ -34,12 +33,5 @@ export class MailQueue {
     const values = keys.map((x) => this.#store.get(x)!);
     await then(values);
     for (const key of keys) this.#store.delete(key);
-  }
-}
-
-export class XMPPMailQueue {
-  static provider(): MailQueue {
-    const config = use(XMPPConfiguration.provider);
-    return new MailQueue(config.maxQueueSize);
   }
 }
