@@ -1,0 +1,27 @@
+#!/bin/sh
+
+tag='nomail'
+
+case $1 in
+    build)
+        podman build -f Containerfile.dev -t $tag .
+        ;;
+
+    npm)
+        shift 1
+        podman run -v .:/app -i -t $tag npm "$@"
+        ;;
+
+    npx)
+        shift 1
+        podman run -v .:/app -i -t $tag npx "$@"
+        ;;
+
+    dev)
+        podman run -v .:/app -p 8000:8000 -i -t $tag npm run dev
+        ;;
+
+    shell)
+        podman run -v .:/app -i -t $tag /bin/sh
+        ;;
+esac
