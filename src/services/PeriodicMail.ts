@@ -1,7 +1,6 @@
 import { IMailer } from "/mailers/IMailer";
 import { MailQueue } from "/persistence/MailQueue";
 import { Lock } from "/util/lock";
-import { use } from "/util/use";
 
 export class PeriodicMail implements IService {
   #mailer: IMailer;
