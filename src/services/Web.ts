@@ -44,7 +44,7 @@ export class Web {
     } else if (isRespondable(err)) {
       return err.response();
     } else {
-      console.error(err.message);
+      console.log(err.message);
       return new Response(
         500,
         { "Content-Type": MIMETYPE.TEXT },

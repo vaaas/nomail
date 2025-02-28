@@ -2,36 +2,41 @@ import { readFileSync } from "node:fs";
 import { cwd } from "node:process";
 import { Record } from "/parsers/Record.js";
 import { NonEmptyString } from "/parsers/NonEmptyString.ts";
+import { Natural } from "/parsers/Natural";
 
 const parser = Record({
   xmpp: Record({
     service: NonEmptyString,
-    domain: NonEmptyString,
     username: NonEmptyString,
     password: NonEmptyString,
     resource: NonEmptyString,
+    period: Natural,
+    maxQueueSize: Natural,
   }),
 });
 
 export class XMPPConfiguration {
   public readonly service: string;
-  public readonly domain: string;
   public readonly username: string;
   public readonly password: string;
   public readonly resource: string;
+  public readonly period: number;
+  public readonly maxQueueSize: number;
 
   constructor(
     service: XMPPConfiguration["service"],
-    domain: XMPPConfiguration["domain"],
     username: XMPPConfiguration["username"],
     password: XMPPConfiguration["password"],
     resource: XMPPConfiguration["resource"],
+    period: XMPPConfiguration["period"],
+    maxQueueSize: XMPPConfiguration["maxQueueSize"],
   ) {
     this.service = service;
-    this.domain = domain;
     this.username = username;
     this.password = password;
     this.resource = resource;
+    this.period = period;
+    this.maxQueueSize = maxQueueSize;
   }
 
   static provider(): XMPPConfiguration {
@@ -40,10 +45,11 @@ export class XMPPConfiguration {
     const config = parser(JSON.parse(contents));
     return new XMPPConfiguration(
       config.xmpp.service,
-      config.xmpp.domain,
       config.xmpp.username,
       config.xmpp.password,
       config.xmpp.resource,
+      config.xmpp.period,
+      config.xmpp.maxQueueSize,
     );
   }
 }

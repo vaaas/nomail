@@ -1,3 +1,4 @@
+import { XMPPConfiguration } from "/configuration/XMPPConfiguration";
 import { IMailer } from "/mailers/IMailer";
 import { XMPPMailer } from "/mailers/XMPPMailer";
 import { MailQueue, XMPPMailQueue } from "/persistence/MailQueue";
@@ -32,7 +33,12 @@ export class PeriodicMail {
       this.#queue
         .consumeBatch((mails) => this.#mailer.sendBatch(mails))
         .then(() => console.log("successfully sent enqueud messages"))
-        .catch((error: Error) => console.error(error.message)),
+        .catch((error: Error) =>
+          console.log(
+            "Something wrong happened while sending messages",
+            error.message,
+          ),
+        ),
     );
   }
 }
@@ -41,6 +47,7 @@ export class PeriodicXMPP {
   static provider(): PeriodicMail {
     const mailer = use(XMPPMailer.provider);
     const queue = use(XMPPMailQueue.provider);
-    return new PeriodicMail(mailer, queue, 1_000);
+    const config = use(XMPPConfiguration.provider);
+    return new PeriodicMail(mailer, queue, config.period);
   }
 }

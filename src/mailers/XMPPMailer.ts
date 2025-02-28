@@ -19,7 +19,6 @@ export class XMPPMailer implements IMailer {
     return new Promise<void>((resolve, reject) => {
       const xmppClient = client({
         service: this.config.service,
-        domain: this.config.domain,
         resource: this.config.resource,
         username: this.config.username,
         password: this.config.password,
@@ -41,7 +40,13 @@ export class XMPPMailer implements IMailer {
         xmppClient.stop().then(() => resolve());
       });
 
-      xmppClient.start().catch(reject);
+      // FIXME: workaround for retarded logging
+      const original = console.log;
+      console.log = () => undefined;
+      xmppClient
+        .start()
+        .catch(reject)
+        .finally(() => (console.log = original));
     });
   }
 

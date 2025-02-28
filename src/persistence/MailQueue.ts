@@ -1,16 +1,22 @@
+import { XMPPConfiguration } from "/configuration/XMPPConfiguration";
 import { Mail } from "/dto/Mail.ts";
+import { QueueSizeExceeded } from "/errors/QueueSizeExceeded";
 import { Unary } from "/util/functions.ts";
+import { use } from "/util/use";
 
 export class MailQueue {
   #store: Map<number, Mail>;
   #i: number;
+  #max: number;
 
-  constructor() {
+  constructor(max: number) {
     this.#i = 0;
     this.#store = new Map();
+    this.#max = max;
   }
 
   push(mail: Mail) {
+    if (this.#store.size >= this.#max) throw new QueueSizeExceeded();
     this.#store.set(this.#i, mail);
     this.#inc();
   }
@@ -33,6 +39,7 @@ export class MailQueue {
 
 export class XMPPMailQueue {
   static provider(): MailQueue {
-    return new MailQueue();
+    const config = use(XMPPConfiguration.provider);
+    return new MailQueue(config.maxQueueSize);
   }
 }
