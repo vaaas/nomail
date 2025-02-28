@@ -1,5 +1,5 @@
+import { MailQueue } from "/modules/MailQueue";
 import { XMPPConfiguration } from "./XMPPConfiguration";
-import { MailQueue } from "/persistence/MailQueue";
 import { use } from "/util/use";
 
 export class XMPPMailQueue {

@@ -1,9 +1,9 @@
 import * as http from "node:http";
 import { HTTPConfiguration } from "/configuration/HTTPConfiguration.ts";
 import { use as defaultUse } from "/util/use.ts";
-import { Router } from "/http/router.ts";
 import { MIMETYPE } from "/util/mimetype.ts";
 import { isRespondable, Response } from "/dto/Response.ts";
+import { Router } from "/Router";
 
 export class Web implements IService {
   #config: HTTPConfiguration;

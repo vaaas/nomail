@@ -1,5 +1,4 @@
 import { IncomingMessage } from "node:http";
-import { MailQueue } from "/persistence/MailQueue";
 import { readBody } from "/util/http";
 import { Response } from "/dto/Response";
 import { MailParser } from "/parsers/MailParser";
@@ -7,6 +6,7 @@ import { MIMETYPE } from "/util/mimetype";
 import { use } from "/util/use";
 import { MethodNotAllowed } from "/errors/MethodNotAllowed";
 import { XMPPMailQueue } from "./XMPPMailQueue";
+import { MailQueue } from "/modules/MailQueue";
 
 export class XMPPController {
   #queue: MailQueue;

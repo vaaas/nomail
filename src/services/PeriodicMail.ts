@@ -1,5 +1,5 @@
-import { IMailer } from "/mailers/IMailer";
-import { MailQueue } from "/persistence/MailQueue";
+import { IMailer } from "/modules/IMailer";
+import { MailQueue } from "/modules/MailQueue";
 import { Lock } from "/util/lock";
 
 export class PeriodicMail implements IService {
