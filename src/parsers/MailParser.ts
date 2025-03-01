@@ -1,7 +1,7 @@
 import { BoundedString } from "./BoundedString";
 import { IParser } from "./IParser";
 import { Record } from "./Record";
-import { Mail } from "/dto/Mail";
+import { Mail } from "nomail/dto/Mail";
 
 export const MailParser: IParser<Mail> = Record({
   from: BoundedString(3, 255),

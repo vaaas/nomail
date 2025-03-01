@@ -8,7 +8,7 @@
     "esbuild": "^0.25.0"
   },
   "exports": {
-    "*": "./src/*"
+    "./*": "./src/*"
   },
   "scripts": {
     "build": "node build.js",

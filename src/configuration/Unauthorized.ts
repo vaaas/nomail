@@ -1,5 +1,5 @@
-import { Respondable, Response } from "/dto/Response";
-import { MIMETYPE } from "/util/mimetype";
+import { Respondable, Response } from "nomail/dto/Response";
+import { MIMETYPE } from "nomail/util/mimetype";
 
 export class Unauthorized extends Error implements Respondable {
   response(): Response {

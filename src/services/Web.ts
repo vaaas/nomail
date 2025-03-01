@@ -1,9 +1,9 @@
 import * as http from "node:http";
-import { HTTPConfiguration } from "/configuration/HTTPConfiguration.ts";
-import { use as defaultUse } from "/util/use.ts";
-import { MIMETYPE } from "/util/mimetype.ts";
-import { isRespondable, Response } from "/dto/Response.ts";
-import { Router } from "/Router";
+import { HTTPConfiguration } from "nomail/configuration/HTTPConfiguration.ts";
+import { use as defaultUse } from "nomail/util/use.ts";
+import { MIMETYPE } from "nomail/util/mimetype.ts";
+import { isRespondable, Response } from "nomail/dto/Response.ts";
+import { Router } from "nomail/Router";
 
 export class Web implements IService {
   #config: HTTPConfiguration;

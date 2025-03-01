@@ -1,5 +1,5 @@
 import { IParser } from "./IParser";
-import { ParsingError } from "/errors/ParsingError";
+import { ParsingError } from "nomail/errors/ParsingError";
 
 export const BoundedString =
   (min: number = 0, max: number = Infinity): IParser<string> =>

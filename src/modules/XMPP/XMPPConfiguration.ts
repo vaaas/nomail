@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { cwd } from "node:process";
-import { Record } from "/parsers/Record.js";
-import { NonEmptyString } from "/parsers/NonEmptyString.ts";
-import { Natural } from "/parsers/Natural";
+import { Record } from "nomail/parsers/Record.js";
+import { NonEmptyString } from "nomail/parsers/NonEmptyString.ts";
+import { Natural } from "nomail/parsers/Natural";
 
 const parser = Record({
   xmpp: Record({

@@ -1,7 +1,7 @@
-import { Mail } from "/dto/Mail.ts";
-import { QueueSizeExceeded } from "/errors/QueueSizeExceeded";
-import { Unary } from "/util/functions.ts";
-import { use } from "/util/use";
+import { Mail } from "nomail/dto/Mail.ts";
+import { QueueSizeExceeded } from "nomail/errors/QueueSizeExceeded";
+import { Unary } from "nomail/util/functions.ts";
+import { use } from "nomail/util/use";
 
 export class MailQueue {
   #store: Map<number, Mail>;

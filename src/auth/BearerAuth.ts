@@ -1,8 +1,8 @@
 import { IncomingMessage } from "node:http";
-import { AuthConfiguration } from "/configuration/AuthConfiguration";
-import { use } from "/util/use";
-import { Unauthorized } from "/configuration/Unauthorized";
-import { Route } from "/Router";
+import { AuthConfiguration } from "nomail/configuration/AuthConfiguration";
+import { use } from "nomail/util/use";
+import { Unauthorized } from "nomail/configuration/Unauthorized";
+import { Route } from "nomail/Router";
 
 const bearerLength = "Bearer ".length;
 

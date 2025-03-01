@@ -1,6 +1,6 @@
 import { IncomingMessage } from "node:http";
-import { NotFound } from "/errors/NotFound.ts";
-import { Response } from "/dto/Response.ts";
+import { NotFound } from "nomail/errors/NotFound.ts";
+import { Response } from "nomail/dto/Response.ts";
 import { BearerAuth } from "./auth/BearerAuth";
 import { use } from "./util/use";
 

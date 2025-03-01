@@ -1,5 +1,5 @@
 import { IParser } from "./IParser.ts";
-import { ParsingError } from "/errors/ParsingError.ts";
+import { ParsingError } from "nomail/errors/ParsingError.ts";
 
 const parseRecord: IParser<Record<string | symbol | number, unknown>> = (x) => {
   if (typeof x !== "object" || x === null)

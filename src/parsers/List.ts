@@ -1,5 +1,5 @@
 import { IParser } from "./IParser";
-import { ParsingError } from "/errors/ParsingError";
+import { ParsingError } from "nomail/errors/ParsingError";
 
 export function List<T>(parser: IParser<T>, allowEmpty = true): IParser<T[]> {
   return function (x) {

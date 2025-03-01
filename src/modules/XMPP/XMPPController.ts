@@ -1,12 +1,12 @@
 import { IncomingMessage } from "node:http";
-import { readBody } from "/util/http";
-import { Response } from "/dto/Response";
-import { MailParser } from "/parsers/MailParser";
-import { MIMETYPE } from "/util/mimetype";
-import { use } from "/util/use";
-import { MethodNotAllowed } from "/errors/MethodNotAllowed";
+import { readBody } from "nomail/util/http";
+import { Response } from "nomail/dto/Response";
+import { MailParser } from "nomail/parsers/MailParser";
+import { MIMETYPE } from "nomail/util/mimetype";
+import { use } from "nomail/util/use";
+import { MethodNotAllowed } from "nomail/errors/MethodNotAllowed";
 import { XMPPMailQueue } from "./XMPPMailQueue";
-import { MailQueue } from "/modules/MailQueue";
+import { MailQueue } from "nomail/modules/MailQueue";
 
 export class XMPPController {
   #queue: MailQueue;

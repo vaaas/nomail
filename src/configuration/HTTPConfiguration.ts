@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { cwd } from "node:process";
-import { Record } from "/parsers/Record.js";
-import { NonEmptyString } from "/parsers/NonEmptyString.ts";
-import { Port } from "/parsers/Port.ts";
+import { Record } from "nomail/parsers/Record.js";
+import { NonEmptyString } from "nomail/parsers/NonEmptyString.ts";
+import { Port } from "nomail/parsers/Port.ts";
 
 const parser = Record({
   http: Record({

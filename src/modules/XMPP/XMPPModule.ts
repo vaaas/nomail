@@ -1,8 +1,8 @@
-import { IModule } from "/modules/IModule";
+import { IModule } from "nomail/modules/IModule";
 import { PeriodicXMPP } from "./PeriodicXMPP";
 import { XMPPController } from "./XMPPController";
-import { App } from "/App";
-import { Router } from "/Router";
+import { App } from "nomail/App";
+import { Router } from "nomail/Router";
 
 export const XMPPModule: IModule = (use) => {
   console.log("registering XMPP feature");

@@ -1,8 +1,8 @@
 import { XMPPConfiguration } from "./XMPPConfiguration";
 import { XMPPMailer } from "./XMPPMailer";
 import { XMPPMailQueue } from "./XMPPMailQueue";
-import { PeriodicMail } from "/services/PeriodicMail";
-import { use } from "/util/use";
+import { PeriodicMail } from "nomail/services/PeriodicMail";
+import { use } from "nomail/util/use";
 
 export class PeriodicXMPP {
   static provider(): PeriodicMail {
