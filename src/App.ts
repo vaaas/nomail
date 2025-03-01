@@ -1,14 +1,20 @@
-import { use } from "./util/use";
+import { IModule, IService } from "@nomail/common";
+import { Router, Web } from "@nomail/http";
+import { use } from "@nomail/service-locator";
 
 export class App {
   #services: IService[];
 
   constructor() {
-    this.#services = [];
+    this.#services = [use(Web.provider)];
   }
 
-  register(service: IService): App {
-    this.#services.push(service);
+  register(module: IModule): App {
+    for (const service of module.services) this.#services.push(service);
+
+    const router = use(Router.provider);
+    for (const route of module.routes) router.add(route.path, route.handler);
+
     return this;
   }
 

@@ -1,16 +1,10 @@
 import { App } from "./App";
-import { XMPPModule } from "./modules/XMPP/XMPPModule";
-import { Web } from "./services/Web";
-import { use } from "./util/use";
+import { use } from "@nomail/service-locator";
+import { XMPPModule } from "@nomail/xmpp";
 
 async function main() {
   console.log("Starting nomail");
-  const app = use(App.provider);
-  app.register(use(Web.provider));
-
-  XMPPModule(use);
-
-  await app.start();
+  await use(App.provider).register(XMPPModule()).start();
 }
 
 main();

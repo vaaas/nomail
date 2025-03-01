@@ -1,0 +1,11 @@
+{
+  "name": "@nomail/xmpp",
+  "author": "Vasileios Pasialiokis",
+  "type": "commonjs",
+  "devDependencies": {
+    "@xmpp/client": "^0.13.4"
+  },
+  "exports": {
+    ".": "./index.ts"
+  }
+}

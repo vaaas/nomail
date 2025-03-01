@@ -1,0 +1,8 @@
+{
+  "name": "@nomail/service-locator",
+  "author": "Vasileios Pasialiokis",
+  "type": "commonjs",
+  "exports": {
+    ".": "./index.ts"
+  }
+}

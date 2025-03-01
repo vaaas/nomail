@@ -1,0 +1,8 @@
+{
+  "name": "@nomail/auth",
+  "author": "Vasileios Pasialiokis",
+  "type": "commonjs",
+  "exports": {
+    ".": "./index.ts"
+  }
+}
