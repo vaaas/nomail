@@ -11,8 +11,8 @@
     "src/workspaces/*"
   ],
   "scripts": {
-    "build": "node build.js",
-    "dev": "NODE_ENV=development npm run build & NODE_ENV=development node --watch --watch-preserve-output build/index.js",
+    "build": "NODE_ENV=production node build.js",
+    "dev": "NODE_ENV=development node build.js & NODE_ENV=development node --watch --watch-preserve-output build/index.js",
     "check": "tsc"
   }
 }
